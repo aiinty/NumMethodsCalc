@@ -4,4 +4,13 @@
     <string name="operations">Operations</string>
     <string name="results_placeholder">Here will be your result...</string>
     <string name="results_title">Result</string>
+    <string name="taken_deficient">with deficient</string>
+    <string name="taken_excess">with excess</string>
+    <string name="taken">taken</string>
+    <string name="absolute_error">Δa value</string>
+    <string name="x_value">X value</string>
+    <string name="relative_error">Wa value</string>
+    <string name="calculate_error">Calculate</string>
+    <string name="number_input">Enter number</string>
+    <string name="significant_numbers">Significant numbers</string>
 </resources>

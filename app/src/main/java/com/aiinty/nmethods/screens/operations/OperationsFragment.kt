@@ -136,7 +136,7 @@ class OperationsFragment : Fragment(), NumberClickInfoInterface, NumberClickDele
     }
 
     override fun onInfoIconClick(idx: Int) {
-        Toast.makeText(context, "Значащих чисел = ${numbersListViewModel.getSignificantDigits(idx)}", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, "${getString(R.string.significant_numbers)} = ${numbersListViewModel.getSignificantDigits(idx)}", Toast.LENGTH_SHORT).show()
     }
 
     override fun onDeleteIconClick(idx: Int) {
