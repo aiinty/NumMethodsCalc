@@ -4,13 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="12dp"
     tools:context=".screens.operations.OperationsFragment">
 
-
     <LinearLayout
+        android:id="@+id/operations_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/operations"
+            android:textStyle="bold"
+            android:textSize="32sp"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/numbers_list"
@@ -29,7 +38,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:text="Результат"
+                android:text="@string/results_title"
                 android:textSize="32sp"/>
 
             <TextView
@@ -38,14 +47,13 @@
                 android:layout_height="0dp"
                 android:padding="16dp"
                 android:layout_weight="1"
-                android:text="dfdfjhgddfg"
-                />
+                android:text="@string/results_placeholder"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="72dp"
-                android:padding="18dp"
+                android:padding="8dp"
+                android:layout_marginEnd="64dp"
                 android:weightSum="4">
 
                 <Button
@@ -54,7 +62,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="2dp"
                     android:layout_weight="1"
-                    android:text="+"/>
+                    android:text="@string/add"/>
 
                 <Button
                     android:id="@+id/operation_sub"
@@ -62,7 +70,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="2dp"
                     android:layout_weight="1"
-                    android:text="-"/>
+                    android:text="@string/subtract"/>
 
                 <Button
                     android:id="@+id/operation_mul"
@@ -70,7 +78,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="2dp"
                     android:layout_weight="1"
-                    android:text="*"/>
+                    android:text="@string/multiply"/>
 
                 <Button
                     android:id="@+id/operation_div"
@@ -78,7 +86,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="2dp"
                     android:layout_weight="1"
-                    android:text="/"/>
+                    android:text="@string/divide"/>
 
             </LinearLayout>
 
@@ -90,9 +98,10 @@
         android:id="@+id/add_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="16dp"
+        android:layout_margin="8dp"
+        android:layout_alignEnd="@+id/operations_container"
+        android:layout_alignBottom="@+id/operations_container"
+
         android:src="@drawable/ic_add"/>
 
 </RelativeLayout>

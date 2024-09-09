@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,7 +20,7 @@ import java.math.BigDecimal
 
 private const val TAG = "OperationsFragment"
 
-class OperationsFragment : Fragment(), NumberClickDeleteInterface {
+class OperationsFragment : Fragment(), NumberClickInfoInterface, NumberClickDeleteInterface {
 
     private lateinit var numbersListViewModel: NumbersListViewModel
     private var adapter: NumbersRecyclerAdapter? = null
@@ -75,7 +76,7 @@ class OperationsFragment : Fragment(), NumberClickDeleteInterface {
 
     private fun updateUI() {
         val numbers = numbersListViewModel.numbers
-        adapter = NumbersRecyclerAdapter(numbers, this)
+        adapter = NumbersRecyclerAdapter(numbers, this, this)
         numbersRecyclerView.adapter = adapter
     }
 
@@ -132,6 +133,10 @@ class OperationsFragment : Fragment(), NumberClickDeleteInterface {
 
         val alertDialog: AlertDialog = alertDialogBuilder.create()
         alertDialog.show()
+    }
+
+    override fun onInfoIconClick(idx: Int) {
+        Toast.makeText(context, "Значащих чисел = ${numbersListViewModel.getSignificantDigits(idx)}", Toast.LENGTH_SHORT).show()
     }
 
     override fun onDeleteIconClick(idx: Int) {

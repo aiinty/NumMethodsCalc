@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error">Error Value</string>
+    <string name="operations">Operations</string>
+    <string name="results_placeholder">Here will be your result...</string>
+    <string name="results_title">Result</string>
+</resources>

@@ -1,7 +1,20 @@
 <resources>
-    <string name="app_name">Калькулятор</string>
+    <string name="app_name" translatable="false">ЧМCalc</string>
     <string name="error">Погрешность</string>
     <string name="operations">Действия</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="results_placeholder">Здесь будет ваш результат...</string>
+    <string name="results_title">Результат</string>
+    <string name="add" translatable="false">+</string>
+    <string name="subtract" translatable="false">-</string>
+    <string name="multiply" translatable="false">*</string>
+    <string name="divide" translatable="false">/</string>
+    <string name="taken_deficient">с недостатком</string>
+    <string name="taken_excess">с избытком</string>
+    <string name="taken">взято</string>
+    <string name="absolute_error">Значение Δa</string>
+    <string name="x_value">Значение X</string>
+    <string name="relative_error">Значение Wa</string>
+    <string name="calculate_error">Посчитать</string>
+    <string name="number_input">Введите число</string>
 </resources>

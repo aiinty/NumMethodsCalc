@@ -1,15 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/error_fragment"
+    android:padding="12dp"
+    android:orientation="vertical"
     tools:context=".screens.error_value.ErrorValueFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/error"
+        android:textStyle="bold"
+        android:textSize="32sp"/>
 
-</FrameLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/x_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:hint="@string/x_value"/>
+
+        <EditText
+            android:id="@+id/absolute_error"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:hint="@string/absolute_error"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/taken"/>
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/taken_excess"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/taken_excess"
+                android:checked="true"/>
+            <RadioButton
+                android:id="@+id/taken_dificient"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/taken_deficient"/>
+
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/relative_error"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:hint="@string/relative_error"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/results_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/results_title"
+            android:textSize="32sp"/>
+
+        <TextView
+            android:id="@+id/results_text"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:padding="16dp"
+            android:layout_weight="1"
+            android:text="@string/results_placeholder"/>
+
+        <Button
+            android:id="@+id/calculate_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/calculate_error"/>
+
+    </LinearLayout>
+
+</LinearLayout>

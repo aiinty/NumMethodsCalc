@@ -19,6 +19,10 @@ class NumbersListViewModel () : ViewModel() {
         numbers.add(value)
     }
 
+    fun deleteNumber(idx: Int) {
+        numbers.removeAt(idx)
+    }
+
     fun sumNumbers() : NumericalMethodsResult {
         return NumericalMethods.sumNumbers(numbers.toMutableList())
     }
@@ -35,7 +39,12 @@ class NumbersListViewModel () : ViewModel() {
         return NumericalMethods.divNumbers(numbers.toMutableList())
     }
 
-    fun deleteNumber(idx: Int) {
-        numbers.removeAt(idx)
+    fun getSignificantDigits(idx: Int) : Int {
+        return NumericalMethods.countSignificantDigits(numbers[idx])
     }
+
+    fun getExactDigits(idx: Int, deltaA: BigDecimal) : Int {
+        return NumericalMethods.countExactDigits(numbers[idx], deltaA)
+    }
+
 }
