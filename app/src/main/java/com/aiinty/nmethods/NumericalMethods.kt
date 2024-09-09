@@ -4,33 +4,35 @@ import java.math.BigDecimal
 import java.math.MathContext
 import java.math.RoundingMode
 
+private const val TAG = "NumericalMethods"
+
 class NumericalMethods {
 
     data class NumericalMethodsResult(val value: BigDecimal, val output: String)
 
     companion object {
 
-        fun sumNumbers(arr: MutableList<BigDecimal>) : NumericalMethodsResult {
+        fun sumNumbers(list: MutableList<BigDecimal>) : NumericalMethodsResult {
             var result: BigDecimal = BigDecimal.ZERO
             var textOut = ""
 
             var minDecimalDigitsCount: Int? = null
-            for (number in arr) {
+            for (number in list) {
                 val digitsCount = countDecimalDigits(number)
                 if (minDecimalDigitsCount == null || digitsCount < minDecimalDigitsCount) {
                     minDecimalDigitsCount = digitsCount
                 }
             }
 
-            arr.forEachIndexed { i, _ ->
-                arr[i] = arr[i].setScale(minDecimalDigitsCount!! + 1, RoundingMode.HALF_EVEN)
-                textOut += "${arr[i].stripTrailingZeros()}"
-                if (i != arr.lastIndex) {
+            list.forEachIndexed { i, _ ->
+                list[i] = list[i].setScale(minDecimalDigitsCount!! + 1, RoundingMode.HALF_EVEN)
+                textOut += "${list[i].stripTrailingZeros()}"
+                if (i != list.lastIndex) {
                     textOut += " + "
                 }
             }
 
-            arr.forEach { n ->
+            list.forEach { n ->
                 result += n
             }
 
@@ -42,27 +44,27 @@ class NumericalMethods {
             )
         }
 
-        fun subNumbers(arr: MutableList<BigDecimal>) : NumericalMethodsResult {
-            var result: BigDecimal = arr[0].multiply(BigDecimal(2))
+        fun subNumbers(list: MutableList<BigDecimal>) : NumericalMethodsResult {
+            var result: BigDecimal = list[0].multiply(BigDecimal(2))
             var textOut = ""
 
             var minDecimalDigitsCount: Int? = null
-            for (number in arr) {
+            for (number in list) {
                 val digitsCount = countDecimalDigits(number)
                 if (minDecimalDigitsCount == null || digitsCount < minDecimalDigitsCount) {
                     minDecimalDigitsCount = digitsCount
                 }
             }
 
-            arr.forEachIndexed { i, _ ->
-                arr[i] = arr[i].setScale(minDecimalDigitsCount!! + 1, RoundingMode.HALF_EVEN)
-                textOut += "${arr[i].stripTrailingZeros()}"
-                if (i != arr.lastIndex) {
+            list.forEachIndexed { i, _ ->
+                list[i] = list[i].setScale(minDecimalDigitsCount!! + 1, RoundingMode.HALF_EVEN)
+                textOut += "${list[i].stripTrailingZeros()}"
+                if (i != list.lastIndex) {
                     textOut += " - "
                 }
             }
 
-            arr.forEach { n -> result -= n }
+            list.forEach { n -> result -= n }
 
             textOut += " = ${result}"
 
@@ -72,27 +74,27 @@ class NumericalMethods {
             )
         }
 
-        fun mulNumbers(arr: MutableList<BigDecimal>) : NumericalMethodsResult {
+        fun mulNumbers(list: MutableList<BigDecimal>) : NumericalMethodsResult {
             var result: BigDecimal = BigDecimal.ZERO
             var textOut = ""
 
             var minSignificantDigitsCount: Int? = null
-            for (number in arr) {
+            for (number in list) {
                 val digitsCount = countSignificantDigits(number)
                 if (minSignificantDigitsCount == null || digitsCount < minSignificantDigitsCount) {
                     minSignificantDigitsCount = digitsCount
                 }
             }
 
-            arr.forEachIndexed { i, n ->
-                arr[i] = arr[i].round(MathContext(minSignificantDigitsCount!! + 1, RoundingMode.HALF_EVEN))
-                textOut += "${arr[i].stripTrailingZeros()}"
-                if (i != arr.lastIndex) {
+            list.forEachIndexed { i, n ->
+                list[i] = list[i].round(MathContext(minSignificantDigitsCount!! + 1, RoundingMode.HALF_EVEN))
+                textOut += "${list[i].stripTrailingZeros()}"
+                if (i != list.lastIndex) {
                     textOut += " * "
                 }
             }
 
-            arr.forEach { n ->
+            list.forEach { n ->
                 if (result == BigDecimal.ZERO) result = n
                 else result = result.multiply(n, MathContext.DECIMAL64)
             }
@@ -105,27 +107,27 @@ class NumericalMethods {
             )
         }
 
-        fun divNumbers(arr: MutableList<BigDecimal>) : NumericalMethodsResult {
+        fun divNumbers(list: MutableList<BigDecimal>) : NumericalMethodsResult {
             var result: BigDecimal = BigDecimal.ZERO
             var textOut = ""
 
             var minSignificantDigitsCount: Int? = null
-            for (number in arr) {
+            for (number in list) {
                 val digitsCount = countSignificantDigits(number)
                 if (minSignificantDigitsCount == null || digitsCount < minSignificantDigitsCount) {
                     minSignificantDigitsCount = digitsCount
                 }
             }
 
-            arr.forEachIndexed { i, n ->
-                arr[i] = arr[i].round(MathContext(minSignificantDigitsCount!! + 1, RoundingMode.HALF_EVEN))
-                textOut += "${arr[i].stripTrailingZeros()}"
-                if (i != arr.lastIndex) {
+            list.forEachIndexed { i, n ->
+                list[i] = list[i].round(MathContext(minSignificantDigitsCount!! + 1, RoundingMode.HALF_EVEN))
+                textOut += "${list[i].stripTrailingZeros()}"
+                if (i != list.lastIndex) {
                     textOut += " / "
                 }
             }
 
-            arr.forEach { n ->
+            list.forEach { n ->
                 if (result == BigDecimal.ZERO) result = n
                 else result = result.divide(n, MathContext.DECIMAL64)
             }
@@ -173,7 +175,7 @@ class NumericalMethods {
             return result
         }
 
-        fun countDigits(value: BigDecimal) : Int {
+        private fun countDigits(value: BigDecimal) : Int {
             return countDecimalDigits(value) + countIntegerDigits(value)
         }
 
@@ -198,7 +200,7 @@ class NumericalMethods {
             return result
         }
 
-        fun countExactDigits(value: BigDecimal, a: BigDecimal): Int {
+        fun countExactDigits(value: BigDecimal, deltaA: BigDecimal): Int {
             val number: String = value.abs()
                 .toPlainString()
                 .reversed()
@@ -210,7 +212,7 @@ class NumericalMethods {
             }
 
             for (digit in number) {
-                if (result == 0 || a.toDouble() <= 0.5 * Math.pow(10.toDouble(), (-separatorIdx--).toDouble())) {
+                if (result == 0 || deltaA.toDouble() <= 0.5 * Math.pow(10.toDouble(), (-separatorIdx--).toDouble())) {
                     break
                 }
                 result--
@@ -219,7 +221,7 @@ class NumericalMethods {
             return result
         }
 
-        fun roundToNSignificantDigits(value: BigDecimal, digitsCount: Int) : BigDecimal {
+        private fun roundToNSignificantDigits(value: BigDecimal, digitsCount: Int) : BigDecimal {
             return value.round(MathContext(digitsCount, RoundingMode.HALF_EVEN))
         }
     }

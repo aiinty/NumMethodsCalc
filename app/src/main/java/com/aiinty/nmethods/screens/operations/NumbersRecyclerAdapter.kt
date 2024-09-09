@@ -1,4 +1,4 @@
-package com.aiinty.nmethods
+package com.aiinty.nmethods.screens.operations
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,17 +6,20 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.aiinty.nmethods.R
 import java.math.BigDecimal
 
+private const val TAG = "NumbersRecyclerAdapter"
+
 class NumbersRecyclerAdapter(
-    var numbers: MutableList<BigDecimal>,
-    val numberClickDeleteInterface: NumberClickDeleteInterface
+    private var numbers: MutableList<BigDecimal>,
+    private val numberClickDeleteInterface: NumberClickDeleteInterface
 )
     : RecyclerView.Adapter<NumbersRecyclerAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val itemText = itemView.findViewById<TextView>(R.id.item_text)
-        val deleteItem = itemView.findViewById<ImageView>(R.id.delete_item)
+        val itemText: TextView = itemView.findViewById(R.id.item_text)
+        val deleteItem: ImageView = itemView.findViewById(R.id.delete_item)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -29,7 +32,7 @@ class NumbersRecyclerAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.itemText.setText(numbers.get(position).toPlainString())
+        holder.itemText.text = numbers[position].toPlainString()
         holder.deleteItem.setOnClickListener {
             numberClickDeleteInterface.onDeleteIconClick(position)
         }

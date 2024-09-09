@@ -1,4 +1,4 @@
-package com.aiinty.nmethods
+package com.aiinty.nmethods.screens
 
 import android.os.Bundle
 import android.widget.Button
@@ -7,6 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
+import com.aiinty.nmethods.R
+import com.aiinty.nmethods.screens.error_value.ErrorValueFragment
+import com.aiinty.nmethods.screens.operations.OperationsFragment
 
 private const val TAG = "MainActivity"
 
@@ -27,13 +30,13 @@ class MainActivity : AppCompatActivity() {
         val currentFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
 
         if (currentFragment == null) {
-            loadFragment(ErrorFragment())
+            loadFragment(ErrorValueFragment())
         }
 
         errorButton = findViewById(R.id.error_button)
         operationsButton = findViewById(R.id.operations_button)
 
-        errorButton.setOnClickListener { _ -> loadFragment(ErrorFragment()) }
+        errorButton.setOnClickListener { _ -> loadFragment(ErrorValueFragment()) }
         operationsButton.setOnClickListener { _ -> loadFragment(OperationsFragment.newInstance()) }
     }
 

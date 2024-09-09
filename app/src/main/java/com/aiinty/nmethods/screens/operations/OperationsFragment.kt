@@ -1,4 +1,4 @@
-package com.aiinty.nmethods
+package com.aiinty.nmethods.screens.operations
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -8,11 +8,11 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import androidx.core.text.isDigitsOnly
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.aiinty.nmethods.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.math.BigDecimal
 
@@ -34,7 +34,7 @@ class OperationsFragment : Fragment(), NumberClickDeleteInterface {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        numbersListViewModel = ViewModelProvider(this).get(NumbersListViewModel::class.java)
+        numbersListViewModel = ViewModelProvider(this)[NumbersListViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -124,7 +124,7 @@ class OperationsFragment : Fragment(), NumberClickDeleteInterface {
         alertDialogBuilder.setTitle("Введите число")
 
         alertDialogBuilder.setPositiveButton("Готово") { _, _ ->
-            if (!userAnswer.text.toString().isNullOrEmpty()) {
+            if (userAnswer.text.toString().isNotEmpty()) {
                 numbersListViewModel.addNumber(BigDecimal(userAnswer.text.toString().trim()))
                 updateUI()
             }

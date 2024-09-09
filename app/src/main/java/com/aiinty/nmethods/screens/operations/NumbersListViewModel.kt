@@ -1,6 +1,7 @@
-package com.aiinty.nmethods
+package com.aiinty.nmethods.screens.operations
 
 import androidx.lifecycle.ViewModel
+import com.aiinty.nmethods.NumericalMethods
 import com.aiinty.nmethods.NumericalMethods.NumericalMethodsResult
 import java.math.BigDecimal
 
