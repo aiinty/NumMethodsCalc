@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="12dp"
-    tools:context=".screens.operations.OperationsFragment">
+    tools:context=".screens.approxnumbers.ApproximateNumbersFragment">
 
     <LinearLayout
         android:id="@+id/operations_container"

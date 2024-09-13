@@ -1,18 +1,18 @@
-package com.aiinty.nmethods
+package com.aiinty.nmethods.numericalmethods
 
 import java.math.BigDecimal
 import java.math.MathContext
 import java.math.RoundingMode
 
-private const val TAG = "NumericalMethods"
+private const val TAG = "ApproximateNumber"
 
-class NumericalMethods {
+class ApproximateNumbers {
 
-    data class NumericalMethodsResult(val value: BigDecimal, val output: String)
+    data class ApproximateNumbersResult(val value: BigDecimal, val output: String)
 
     companion object {
 
-        fun sumNumbers(list: MutableList<BigDecimal>) : NumericalMethodsResult {
+        fun sum(list: MutableList<BigDecimal>) : ApproximateNumbersResult {
             var result: BigDecimal = BigDecimal.ZERO
             var textOut = ""
 
@@ -38,13 +38,13 @@ class NumericalMethods {
 
             textOut += " = ${result}"
 
-            return NumericalMethodsResult(
+            return ApproximateNumbersResult(
                 result.setScale(minDecimalDigitsCount!!, RoundingMode.HALF_EVEN),
                 textOut
             )
         }
 
-        fun subNumbers(list: MutableList<BigDecimal>) : NumericalMethodsResult {
+        fun sub(list: MutableList<BigDecimal>) : ApproximateNumbersResult {
             var result: BigDecimal = list[0].multiply(BigDecimal(2))
             var textOut = ""
 
@@ -68,13 +68,13 @@ class NumericalMethods {
 
             textOut += " = ${result}"
 
-            return NumericalMethodsResult(
+            return ApproximateNumbersResult(
                 result.setScale(minDecimalDigitsCount!!, RoundingMode.HALF_EVEN),
                 textOut
             )
         }
 
-        fun mulNumbers(list: MutableList<BigDecimal>) : NumericalMethodsResult {
+        fun mul(list: MutableList<BigDecimal>) : ApproximateNumbersResult {
             var result: BigDecimal = BigDecimal.ZERO
             var textOut = ""
 
@@ -101,13 +101,13 @@ class NumericalMethods {
 
             textOut += " = ${result}"
 
-            return NumericalMethodsResult(
+            return ApproximateNumbersResult(
                 roundToNSignificantDigits(result, minSignificantDigitsCount!!),
                 textOut
             )
         }
 
-        fun divNumbers(list: MutableList<BigDecimal>) : NumericalMethodsResult {
+        fun div(list: MutableList<BigDecimal>) : ApproximateNumbersResult {
             var result: BigDecimal = BigDecimal.ZERO
             var textOut = ""
 
@@ -134,7 +134,7 @@ class NumericalMethods {
 
             textOut += " = ${result}"
 
-            return NumericalMethodsResult(
+            return ApproximateNumbersResult(
                 roundToNSignificantDigits(result, minSignificantDigitsCount!!),
                 textOut
             )

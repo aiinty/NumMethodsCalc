@@ -1,18 +1,15 @@
 package com.aiinty.nmethods.screens
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
-import com.aiinty.nmethods.NumericalMethods
 import com.aiinty.nmethods.R
-import com.aiinty.nmethods.screens.error_value.ErrorValueFragment
-import com.aiinty.nmethods.screens.operations.OperationsFragment
-import java.math.BigDecimal
+import com.aiinty.nmethods.screens.errvalue.ErrorValueFragment
+import com.aiinty.nmethods.screens.approxnumbers.ApproximateNumbersFragment
 
 private const val TAG = "MainActivity"
 
@@ -33,14 +30,14 @@ class MainActivity : AppCompatActivity() {
         val currentFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
 
         if (currentFragment == null) {
-            loadFragment(ErrorValueFragment())
+            loadFragment(ApproximateNumbersFragment.newInstance())
         }
 
         errorButton = findViewById(R.id.error_button)
         operationsButton = findViewById(R.id.operations_button)
 
         errorButton.setOnClickListener { _ -> loadFragment(ErrorValueFragment.newInstance()) }
-        operationsButton.setOnClickListener { _ -> loadFragment(OperationsFragment.newInstance()) }
+        operationsButton.setOnClickListener { _ -> loadFragment(ApproximateNumbersFragment.newInstance()) }
     }
 
     private fun loadFragment(f: Fragment) {

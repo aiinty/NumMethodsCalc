@@ -1,4 +1,4 @@
-package com.aiinty.nmethods.screens.operations
+package com.aiinty.nmethods.screens.approxnumbers
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -18,12 +18,12 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.math.BigDecimal
 
 
-private const val TAG = "OperationsFragment"
+private const val TAG = "ApproximateNumbersFragment"
 
-class OperationsFragment : Fragment(), NumberClickInfoInterface, NumberClickDeleteInterface {
+class ApproximateNumbersFragment : Fragment(), NumberClickInfoInterface, NumberClickDeleteInterface {
 
-    private lateinit var numbersListViewModel: NumbersListViewModel
-    private var adapter: NumbersRecyclerAdapter? = null
+    private lateinit var approximateNumbersViewModel: ApproximateNumbersViewModel
+    private var adapter: ApproximateNumbersRecyclerAdapter? = null
     private lateinit var numbersRecyclerView: RecyclerView
     private lateinit var addNumber: FloatingActionButton
 
@@ -35,7 +35,7 @@ class OperationsFragment : Fragment(), NumberClickInfoInterface, NumberClickDele
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        numbersListViewModel = ViewModelProvider(this)[NumbersListViewModel::class.java]
+        approximateNumbersViewModel = ViewModelProvider(this)[ApproximateNumbersViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -43,7 +43,7 @@ class OperationsFragment : Fragment(), NumberClickInfoInterface, NumberClickDele
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_operations, container, false)
+        val view = inflater.inflate(R.layout.fragment_approx_numbers, container, false)
 
         numbersRecyclerView = view.findViewById(R.id.numbers_list)
         numbersRecyclerView.layoutManager = LinearLayoutManager(context)
@@ -70,19 +70,15 @@ class OperationsFragment : Fragment(), NumberClickInfoInterface, NumberClickDele
         return view
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
-
     private fun updateUI() {
-        val numbers = numbersListViewModel.numbers
-        adapter = NumbersRecyclerAdapter(numbers, this, this)
+        val numbers = approximateNumbersViewModel.numbers
+        adapter = ApproximateNumbersRecyclerAdapter(numbers, this, this)
         numbersRecyclerView.adapter = adapter
     }
 
     private fun sumButtonListener() {
         if (adapter!!.itemCount > 1){
-            val result = numbersListViewModel.sumNumbers()
+            val result = approximateNumbersViewModel.sumNumbers()
             var text = "S = ${result.output} ≈ ${result.value}"
             resultsText.text = text
         }
@@ -90,7 +86,7 @@ class OperationsFragment : Fragment(), NumberClickInfoInterface, NumberClickDele
 
     private fun subButtonListener() {
         if (adapter!!.itemCount > 1){
-            val result = numbersListViewModel.subNumbers()
+            val result = approximateNumbersViewModel.subNumbers()
             var text = "S = ${result.output} ≈ ${result.value}"
             resultsText.text = text
         }
@@ -98,7 +94,7 @@ class OperationsFragment : Fragment(), NumberClickInfoInterface, NumberClickDele
 
     private fun mulButtonListener() {
         if (adapter!!.itemCount > 1){
-            val result = numbersListViewModel.mulNumbers()
+            val result = approximateNumbersViewModel.mulNumbers()
             var text = "P = ${result.output} ≈ ${result.value}"
             resultsText.text = text
         }
@@ -106,7 +102,7 @@ class OperationsFragment : Fragment(), NumberClickInfoInterface, NumberClickDele
 
     private fun divButtonListener() {
         if (adapter!!.itemCount > 1){
-            val result = numbersListViewModel.divNumbers()
+            val result = approximateNumbersViewModel.divNumbers()
             var text = "P = ${result.output} ≈ ${result.value}"
             resultsText.text = text
         }
@@ -126,7 +122,7 @@ class OperationsFragment : Fragment(), NumberClickInfoInterface, NumberClickDele
 
         alertDialogBuilder.setPositiveButton("Готово") { _, _ ->
             if (userAnswer.text.toString().isNotEmpty()) {
-                numbersListViewModel.addNumber(BigDecimal(userAnswer.text.toString().trim()))
+                approximateNumbersViewModel.addNumber(BigDecimal(userAnswer.text.toString().trim()))
                 updateUI()
             }
         }
@@ -136,17 +132,21 @@ class OperationsFragment : Fragment(), NumberClickInfoInterface, NumberClickDele
     }
 
     override fun onInfoIconClick(idx: Int) {
-        Toast.makeText(context, "${getString(R.string.significant_numbers)} = ${numbersListViewModel.getSignificantDigits(idx)}", Toast.LENGTH_SHORT).show()
+        Toast.makeText(
+            context,
+            "${getString(R.string.significant_numbers)} = ${approximateNumbersViewModel.getSignificantDigits(idx)}",
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
     override fun onDeleteIconClick(idx: Int) {
-        numbersListViewModel.deleteNumber(idx)
+        approximateNumbersViewModel.deleteNumber(idx)
         updateUI()
     }
 
     companion object {
-        fun newInstance(): OperationsFragment {
-            return OperationsFragment()
+        fun newInstance(): ApproximateNumbersFragment {
+            return ApproximateNumbersFragment()
         }
     }
 }

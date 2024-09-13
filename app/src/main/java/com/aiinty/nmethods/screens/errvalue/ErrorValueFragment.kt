@@ -1,4 +1,4 @@
-package com.aiinty.nmethods.screens.error_value
+package com.aiinty.nmethods.screens.errvalue
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
