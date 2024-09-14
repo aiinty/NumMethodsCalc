@@ -1,3 +1,11 @@
+import java.util.Date
+import java.text.SimpleDateFormat
+
+val date = Date()
+val dateFormat = SimpleDateFormat("yyMMddHH")
+val verName = dateFormat.format(date)
+val verCode = verName.toInt()
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -11,8 +19,8 @@ android {
         applicationId = "com.aiinty.nmethods"
         minSdk = 24
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = verCode
+        versionName = verName
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
