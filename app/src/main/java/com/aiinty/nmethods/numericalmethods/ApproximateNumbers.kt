@@ -86,7 +86,7 @@ class ApproximateNumbers {
                 }
             }
 
-            list.forEachIndexed { i, n ->
+            list.forEachIndexed { i, _ ->
                 list[i] = list[i].round(MathContext(minSignificantDigitsCount!! + 1, RoundingMode.HALF_EVEN))
                 textOut += "${list[i].stripTrailingZeros()}"
                 if (i != list.lastIndex) {
@@ -119,7 +119,7 @@ class ApproximateNumbers {
                 }
             }
 
-            list.forEachIndexed { i, n ->
+            list.forEachIndexed { i, _ ->
                 list[i] = list[i].round(MathContext(minSignificantDigitsCount!! + 1, RoundingMode.HALF_EVEN))
                 textOut += "${list[i].stripTrailingZeros()}"
                 if (i != list.lastIndex) {

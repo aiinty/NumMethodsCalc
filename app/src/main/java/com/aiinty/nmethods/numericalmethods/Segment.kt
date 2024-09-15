@@ -57,15 +57,15 @@ class Segment(
             throw IllegalArgumentException()
         }
         return Segment(
-            (this.lowerLimit / other.upperLimit).setScale(2, RoundingMode.DOWN),
-            (this.upperLimit / other.lowerLimit).setScale(2, RoundingMode.UP)
+            this.lowerLimit.divide(other.upperLimit, RoundingMode.DOWN),
+            this.upperLimit.divide(other.lowerLimit, RoundingMode.UP)
         )
     }
 
     fun pow(n: Int): Segment {
         return Segment(
-            this.lowerLimit.pow(n),
-            this.upperLimit.pow(n)
+            this.lowerLimit.pow(n).setScale(2, RoundingMode.DOWN),
+            this.upperLimit.pow(n).setScale(2, RoundingMode.UP)
         )
     }
 
@@ -73,6 +73,10 @@ class Segment(
         return other is Segment
                 && this.lowerLimit == other.lowerLimit
                 && this.upperLimit == other.upperLimit
+    }
+
+    override fun toString(): String {
+        return "${super.toString()}, lowerLimit = ${this.lowerLimit}, upperLimit = ${this.upperLimit}"
     }
 
     override fun hashCode(): Int {
